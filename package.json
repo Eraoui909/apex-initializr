@@ -1,0 +1,15 @@
+{
+  "name": "apex-initializr",
+  "version": "1.0.0",
+  "description": "",
+  "bin": "./bin/cli.js",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hamza Eraoui",
+  "license": "ISC"
+}
