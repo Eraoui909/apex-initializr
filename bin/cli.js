@@ -13,8 +13,14 @@ const runCommand = command => {
 }
 
 const repoName = process.argv[2];
+if( repoName === undefined) {
+
+    console.log("Project name is required");
+    process.exit(-1);
+}
+
 const gitCheckoutCommand = `git clone --depth 1 git@github.com:Eraoui909/apex-initializr.git ${repoName}`; 
-// const installDepsCommand = `cd ${repoName} && npm install`;
+const installDepsCommand = `cd ${repoName}`;
 
 console.log(`Cloning the repo with name ${repoName}`);
 const checkOut = runCommand(gitCheckoutCommand);
