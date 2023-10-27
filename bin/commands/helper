@@ -16,14 +16,13 @@ const runCommand = command => {
 
 
 function copyAndRenameFile(sourcePath, destinationPath, newFilename, callback) {
-    const sourceFile = sourcePath;
+    const sourceFile = path.join(sourcePath);
     const destinationFile = path.join(destinationPath, newFilename);
 
-    runCommand('ls -al');
-    runCommand(`ls -al ${path.join(destinationPath)}`);
-
-    console.log(sourceFile);
-    console.log(destinationFile);
+    if (fs.existsSync(destinationFile)){
+        console.log(`${destinationFile} already exist!!`);
+        process.exit(-1);
+    }
 
     fs.copyFile(sourceFile, destinationFile, (err) => {
             if (err) {
@@ -34,7 +33,27 @@ function copyAndRenameFile(sourcePath, destinationPath, newFilename, callback) {
     });
 }
 
+function replaceStringInFile(filePath, searchString, replacement) {
+    fs.readFile(filePath, 'utf8', (err, data) => {
+      if (err) {
+        console.error(`Error reading the file: ${err}`);
+        return;
+      }
+  
+      const updatedData = data.replace(new RegExp(searchString, 'g'), replacement);
+  
+      fs.writeFile(filePath, updatedData, 'utf8', (err) => {
+        if (err) {
+          console.error(`Error writing to the file: ${err}`);
+        } else {
+          console.log(`String '${searchString}' replaced with '${replacement}' in ${filePath}.`);
+        }
+      });
+    });
+  }
+
 module.exports = {
     runCommand,
-    copyAndRenameFile
+    copyAndRenameFile,
+    replaceStringInFile
 }
