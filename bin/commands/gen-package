@@ -1,0 +1,17 @@
+#!/usr/bin/env node
+
+const {runCommand, copyAndRenameFile} = require('./helper')
+
+function genPackage(packageName){
+    console.log("generate package in src/packages ...");
+    copyAndRenameFile(`./config/templates/template_pkg.pls`,`./src/packages`, packageName, (err, result) => {
+            if (err) {
+                console.error(`Error: ${err}`);
+            } else {
+                console.log(result);
+            }
+        }
+    );
+}
+
+module.exports = genPackage;

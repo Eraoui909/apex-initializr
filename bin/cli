@@ -1,0 +1,19 @@
+#!/usr/bin/env node
+
+const { program } = require('commander');
+
+const initialize = require('./commands/create-project')
+program
+    .command('initialize <projectName>')
+    .description(`Initialize an apex application`)
+    .action(initialize)
+;
+
+const genPackage = require('./commands/gen-package')
+program
+    .command('gen-package <packageName>')
+    .description(`Generate a package with a generic template`)
+    .action(genPackage)
+;
+
+program.parse()

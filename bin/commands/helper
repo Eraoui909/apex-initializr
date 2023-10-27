@@ -1,0 +1,40 @@
+#!/usr/bin/env node
+
+const {execSync} = require('child_process');
+const fs = require('fs');
+const path = require('path');
+
+const runCommand = command => {
+    try{
+        execSync(`${command}`, {stdio: 'inherit', shell: '/bin/bash'});
+    }catch(e){
+        console.log(`Failed to execute ${command}`, e);
+        return false;
+    }
+    return true;
+}
+
+
+function copyAndRenameFile(sourcePath, destinationPath, newFilename, callback) {
+    const sourceFile = sourcePath;
+    const destinationFile = path.join(destinationPath, newFilename);
+
+    runCommand('ls -al');
+    runCommand(`ls -al ${path.join(destinationPath)}`);
+
+    console.log(sourceFile);
+    console.log(destinationFile);
+
+    fs.copyFile(sourceFile, destinationFile, (err) => {
+            if (err) {
+                callback(err);
+            } else {
+                callback(null, `File '${newFilename}' has been copied and renamed to '${destinationPath}'.`);
+            }
+    });
+}
+
+module.exports = {
+    runCommand,
+    copyAndRenameFile
+}
