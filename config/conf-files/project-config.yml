@@ -1,9 +1,9 @@
 # Name of Schema
-SCHEMA_NAME: einstein
+SCHEMA_NAME: schema_name
 # Name of default workspace that applications are associated with
-APEX_WORKSPACE: einstein
+APEX_WORKSPACE: workspace_name
 # Comma delimited list of APEX Applications to export. Ex: 100,200
-APEX_APP_IDS: 300000,310000,311461,320000
+APEX_APP_IDS: 100,200
 
 # File extensions
 # Will be used throughought the scripts to generate lists of packages, views, etc from the filesystem
