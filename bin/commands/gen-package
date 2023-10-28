@@ -37,9 +37,6 @@ function genPackage(packageName){
             }
         );
         runCommand("cd .");
-        // console.log(__dirname);
-        // console.log(process.cwd());
-
         //embed the package name inside the file
         replaceStringInFile(tergetPath+"/"+package[key][0], searchString, packageName, (err, result) => {
             if (err) {

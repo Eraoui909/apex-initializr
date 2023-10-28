@@ -16,4 +16,11 @@ program
     .action(genPackage)
 ;
 
+const genTable = require('./commands/gen-table')
+program
+    .command('gen-table <tableName>')
+    .description(`Generate a table with a generic template`)
+    .action(genTable)
+;
+
 program.parse()
