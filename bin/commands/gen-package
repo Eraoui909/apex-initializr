@@ -1,17 +1,54 @@
 #!/usr/bin/env node
 
-const {runCommand, copyAndRenameFile} = require('./helper')
+const {runCommand, copyAndRenameFile, replaceStringInFile} = require('./helper')
 
 function genPackage(packageName){
-    console.log("generate package in src/packages ...");
-    copyAndRenameFile(`./config/templates/template_pkg.pls`,`./src/packages`, packageName, (err, result) => {
+
+    let packageSpec = `${packageName}.pls`;
+    let packageBody = `${packageName}.plb`;
+
+    const packageSpecTemplate = `./config/templates/template_pkg.pls`;
+    const packageBodyTemplate = `./config/templates/template_pkg.plb`;
+
+    const tergetPath = `./src/packages`;
+    const searchString = "CHANGEME";
+
+    const package = {
+        "spec": [
+            packageSpec,
+            packageSpecTemplate
+        ],
+        "body": [
+            packageBody,
+            packageBodyTemplate
+        ]
+    }
+
+    for (const key in package) {
+
+        console.log(`generate package ${key} in src/packages...`);
+        // generate file
+        copyAndRenameFile(package[key][1],tergetPath , package[key][0], (err, result) => {
+                if (err) {
+                    console.error(`Error: ${err}`);
+                } else {
+                    console.log(result);
+                }
+            }
+        );
+        runCommand("cd .");
+        // console.log(__dirname);
+        // console.log(process.cwd());
+
+        //embed the package name inside the file
+        replaceStringInFile(tergetPath+"/"+package[key][0], searchString, packageName, (err, result) => {
             if (err) {
                 console.error(`Error: ${err}`);
             } else {
                 console.log(result);
             }
-        }
-    );
+        });
+    }
 }
 
 module.exports = genPackage;

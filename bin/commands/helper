@@ -33,24 +33,25 @@ function copyAndRenameFile(sourcePath, destinationPath, newFilename, callback) {
     });
 }
 
-function replaceStringInFile(filePath, searchString, replacement) {
+function replaceStringInFile(filePath, searchString, replacement, callback) {
     fs.readFile(filePath, 'utf8', (err, data) => {
-      if (err) {
-        console.error(`Error reading the file: ${err}`);
-        return;
-      }
-  
-      const updatedData = data.replace(new RegExp(searchString, 'g'), replacement);
-  
-      fs.writeFile(filePath, updatedData, 'utf8', (err) => {
+        
         if (err) {
-          console.error(`Error writing to the file: ${err}`);
-        } else {
-          console.log(`String '${searchString}' replaced with '${replacement}' in ${filePath}.`);
+            callback(err);
+            return;
         }
-      });
+
+        const updatedData = data.replace(new RegExp(searchString, 'g'), replacement);
+
+        fs.writeFile(filePath, updatedData, 'utf8', (writeErr) => {
+            if (writeErr) {
+                callback(writeErr);
+            } else {
+                callback(null, `String '${searchString}' replaced with '${replacement}' in ${filePath}.`);
+            }
+        });
     });
-  }
+}
 
 module.exports = {
     runCommand,
