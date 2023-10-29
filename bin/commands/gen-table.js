@@ -16,7 +16,7 @@ function genTable(tableName){
         }
     );
     //embed the table name inside the file
-    replaceStringInFile("./src/tables/"+table, 'change_me', tableName, (err, result) => {
+    replaceStringInFile("./src/tables/"+table, 'CHANGE_ME', tableName, (err, result) => {
         if (err) {
             console.error(`Error: ${err}`);
         } else {
