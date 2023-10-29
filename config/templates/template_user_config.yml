@@ -1,0 +1,10 @@
+# Connection string to development environment
+DB_CONN: ""
+
+# SQLcl binary (either sql or sqlcl depending on if you changed anything)
+# If using a docker container for SQLcl ensure the run alias does not include the "-it" option as TTY is not necessary for these scripts
+SQLCL: sql
+
+# sql*plus binary
+# If using a docker container for sqlplus ensure the run alias does not include the "-it" option as TTY is not necessary for these scripts
+SQLPLUS: sqlplus
