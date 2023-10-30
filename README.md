@@ -39,6 +39,9 @@ Please take note that this framework is **open source**. I wholeheartedly welcom
 
 * ## Project Architecture Details
 
+    This section provides a concise overview of each root folder in the project. Feel free to add or remove folders to align with your project's specific needs.
+    For documentation related to subfolders not listed here, please refer to the **README** file within the respective folder
+
     | Folder | Description |
     |:--|--|
     | bin | This directory houses the predefined commands utilized within the CLI
