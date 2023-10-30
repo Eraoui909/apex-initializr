@@ -7,9 +7,15 @@ Please take note that this framework is **open source**. I wholeheartedly welcom
 * ## Index
 
   1. [Index](#index)
-  2. [Project Architecture](#project-architecture)
-  3. [Project Architecture Details](#project-architecture-details)
+  2. [Requirements](#requirements)
+  3. [Project Architecture](#project-architecture)
+  4. [Project Architecture Details](#project-architecture-details)
 
+* ## Requirements
+
+  * node > v20.9.0
+  * You must have the database connection string
+  
 * ## Project Architecture
 
   - `bin`
