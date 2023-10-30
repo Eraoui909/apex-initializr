@@ -1,8 +1,8 @@
 # apex-initializr
 
-Framework designed for Oracle PL/SQL and/or APEX development projects. This framework offers scripts and processes to accelerate your development and streamline certain aspects of your release procedures
+Framework designed for Oracle PLSQL and/or APEX development projects. This framework offers scripts and processes to accelerate your development and streamline certain aspects of your release procedures
 
-Please take note that this framework is open source. I wholeheartedly welcome any new ideas that can further enhance the growth of this project. If something doesn't align with your project's specific needs or if you require additional modifications, please feel free to make the necessary adjustments and submit a pull request. All the tools provided here are geared towards expediting the delivery of results.
+Please take note that this framework is **open source**. I wholeheartedly welcome any new ideas that can further enhance the growth of this project. If something doesn't align with your project's specific needs or if you require additional modifications, please feel free to make the necessary adjustments and submit a pull request. All the tools provided here are geared towards expediting the delivery of results.
 
 * ## Index
 
@@ -12,24 +12,24 @@ Please take note that this framework is open source. I wholeheartedly welcome an
 
 * ## Project Architecture
 
-  - bin
-    - commands
-  - config
-    - auto-genertaed
-  - scripts
-    - automations
-    - builds
-  - src
-    - apex
-    - data
-    - jobs
-    - mviews
-    - packages
-    - tables
-    - triggers
-    - view
-  - test
-    - packages
+  - `bin`
+    - `commands`
+  - `config`
+    - `auto-genertaed`
+  - `scripts`
+    - `automations`
+    - `builds`
+  - `src`
+    - `apex`
+    - `data`
+    - `jobs
+    - `mviews`
+    - `packages`
+    - `tables`
+    - `triggers`
+    - `view`
+  - `test`
+    - `packages`
 
 * ## Project Architecture Details
 
