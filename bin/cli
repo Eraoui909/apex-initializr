@@ -9,6 +9,16 @@ program
     .action(initialize)
 ;
 
+const compileFile = require('./commands/compile-file')
+program
+    .command('compile <filePath>')
+    .description(`
+                    Compile your current file into the deatabase directly.
+                    <filePath>: the Path should start from the project ROOT
+                `)
+    .action(compileFile)
+;
+
 const genPackage = require('./commands/gen-package')
 program
     .command('gen-package <packageName>')
@@ -23,14 +33,12 @@ program
     .action(genTable)
 ;
 
-const compileFile = require('./commands/compile-file')
+const genView = require('./commands/gen-view')
 program
-    .command('compile <filePath>')
-    .description(`
-                    Compile your current file into the deatabase directly.
-                    <filePath>: the Path should start from the project ROOT
-                `)
-    .action(compileFile)
+    .command('gen-view <viewName>')
+    .description(`Generate a view with a generic template`)
+    .action(genView)
 ;
+
 
 program.parse()
