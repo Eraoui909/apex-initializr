@@ -1,4 +1,4 @@
-create or replace package body app_qa_category as
+create or replace package body todo_package as
 
 --------------------------------------------------------------------------------
 --
@@ -10,5 +10,5 @@ create or replace package body app_qa_category as
 --------------------------------------------------------------------------------
 
 
-end app_qa_category;
+end todo_package;
 /
