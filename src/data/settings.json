@@ -1,0 +1,24 @@
+[
+    {
+        "setting_code"              : "SETTING_CODE",
+        "setting_name"              : "Setting Name",
+        "data_type"                 : "INTEGER|STRING|CLOB|JSON|CLOB_JSON|YN|BUILD_OPTION",
+        "build_option_name"         : "BUILD_OPTION_NAME",
+        "editable_yn"               : "Y|N",
+        "default_value"             : "Default Value",
+        "json_merge_default_yn"     : "Y|N",
+        "setting_desc"              : "Setting Description",
+        "developer_desc"            : "Developer Notes"
+    },
+    {
+        "setting_code"              : "APEX_APP_ID",
+        "setting_name"              : "APEX App ID",
+        "data_type"                 : "INTEGER",
+        "build_option_name"         : "",
+        "editable_yn"               : "Y",
+        "default_value"             : "123",
+        "json_merge_default_yn"     : "N",
+        "setting_desc"              : "",
+        "developer_desc"            : ""
+    },
+]
