@@ -48,4 +48,4 @@ Please take note that this framework is **open source**. I wholeheartedly welcom
     | config | Use YAML files in this folder to make any custom configurations
     | scripts | TBD
     | src | Developers are expected to spend the majority of their time in this directory. It encompasses all the necessary development components (packages, views, tables...)
-    | test | This directory is intended for performing necessary testing, including unit tests and automation tests.
+    | test | This directory is intended for performing necessary testing, including unit tests and automation tests...
