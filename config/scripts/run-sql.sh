@@ -1,15 +1,25 @@
 #!/bin/bash -ex
 
-# Env variables $1, $2, etc are from the tasks.json args array
+# load global paths
+source config/conf-files/auto-generated/paths.sh
 
-# Directory of this file
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+# make sure that you're in the root 
+if [ "$(pwd)" != "$dir_root" ]; then
+    cd $dir_root;
+fi
 
-source "./config/conf-files/auto-generated/user-config.sh"
+# load db_connection and sqlplus
+source $file_conf_user_config
 
 # File can be referenced either as a full path or relative path
-#TODO hamza: check if the file exist
 FILE_PATH=$1
+if [ -f "$FILE_PATH" ]; then
+    echo "$filename exists."
+else
+    echo "$filename does not exist."
+    exit 1
+fi
+
 
 
 # run sqlplus, execute the script, then get the error list and exit
