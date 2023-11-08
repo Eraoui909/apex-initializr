@@ -21,4 +21,3 @@ dir_test_packages=test/packages
 file_conf_paths=config/conf-files/auto-generated/paths.sh
 file_conf_project_config=config/conf-files/auto-generated/project-config.sh
 file_conf_user_config=config/conf-files/auto-generated/user-config.sh
-test=tes
