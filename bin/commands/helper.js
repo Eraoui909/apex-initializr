@@ -15,6 +15,22 @@ const runCommand = command => {
 }
 
 
+// this script make sure that you're in the root
+const checkRootFolder = () => {
+
+    // This file is just a test file, and we can use any file we want in its place.
+    const globalPaths = 'config/conf-files/auto-generated/paths.sh';
+
+    if (!fs.existsSync(globalPaths)) {
+        console.log('You must be in the root folder to run this script or command!');
+        const rootFolder = execSync('git rev-parse --show-toplevel', { encoding: 'utf8' }).trim();
+        console.log(`Please make sure that you are in ${rootFolder}`)
+        process.exit(1);
+    }
+
+}
+
+
 function copyAndRenameFile(sourcePath, destinationPath, newFilename, callback) {
     const sourceFile = path.join(sourcePath);
     const destinationFile = path.join(destinationPath, newFilename);
@@ -56,5 +72,6 @@ function replaceStringInFile(filePath, searchString, replacement, callback) {
 module.exports = {
     runCommand,
     copyAndRenameFile,
-    replaceStringInFile
+    replaceStringInFile,
+    checkRootFolder
 }

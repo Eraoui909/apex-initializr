@@ -1,27 +1,6 @@
 #!/usr/bin/env node
 
-// ###################################################
-// ##                  Start                        ##
-// ## this script make sure that you're in the root ##
-// ###################################################
-const fs = require('fs');
-const { execSync } = require('child_process');
-
-const globalPaths = 'config/conf-files/auto-generated/paths.sh';
-
-if (!fs.existsSync(globalPaths)) {
-    console.log('You must be in the root folder to run this script or command!');
-    const rootFolder = execSync('git rev-parse --show-toplevel', { encoding: 'utf8' }).trim();
-    console.log(`Please make sure that you are in ${rootFolder}`)
-    process.exit(1);
-}
-// ###################################################
-// ##                    End                        ##
-// ## this script make sure that you're in the root ##
-// ###################################################
-
 const { program } = require('commander');
-const {runCommand} = require('./commands/helper');
 
 const initialize = require('./commands/create-project')
 program

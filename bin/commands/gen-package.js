@@ -1,8 +1,11 @@
 #!/usr/bin/env node
 
-const {runCommand, copyAndRenameFile, replaceStringInFile} = require('./helper')
+const {runCommand, copyAndRenameFile, replaceStringInFile, checkRootFolder} = require('./helper')
 
 function genPackage(packageName){
+
+    // make sure that you're in the root
+    checkRootFolder();
 
     let packageSpec = `${packageName}.pls`;
     let packageBody = `${packageName}.plb`;

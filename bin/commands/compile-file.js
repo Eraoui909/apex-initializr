@@ -1,9 +1,12 @@
 #!/usr/bin/env node
 
-const {runCommand, copyAndRenameFile, replaceStringInFile} = require('./helper')
+const {runCommand, copyAndRenameFile, checkRootFolder} = require('./helper')
 const fs = require("fs");
 
 function compileFile(filePath){
+
+    // make sure that you're in the root
+    checkRootFolder();
 
     console.log("compiling ...");
 

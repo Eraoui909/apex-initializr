@@ -1,8 +1,11 @@
 #!/usr/bin/env node
 
-const {runCommand, copyAndRenameFile, replaceStringInFile} = require('./helper')
+const {copyAndRenameFile, replaceStringInFile, checkRootFolder} = require('./helper')
 
 function genTable(tableName){
+
+    // make sure that you're in the root
+    checkRootFolder();
 
     let table = `${tableName}.sql`;
 

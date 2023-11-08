@@ -1,8 +1,11 @@
 #!/usr/bin/env node
 
-const {runCommand, copyAndRenameFile, replaceStringInFile} = require('./helper')
+const {checkRootFolder, copyAndRenameFile, replaceStringInFile} = require('./helper')
 
 function genView(viewName){
+
+    // make sure that you're in the root
+    checkRootFolder();
 
     let view = `${viewName}.sql`;
 
