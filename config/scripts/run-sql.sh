@@ -14,9 +14,9 @@ source $file_conf_user_config
 # File can be referenced either as a full path or relative path
 FILE_PATH=$1
 if [ -f "$FILE_PATH" ]; then
-    echo "$filename exists."
+    echo "$FILE_PATH exists."
 else
-    echo "$filename does not exist."
+    echo "$FILE_PATH does not exist."
     exit 1
 fi
 

@@ -6,6 +6,7 @@ const fs = require("fs");
 function compileFile(filePath){
 
     console.log("compiling ...");
+    console.log("!! Important start !!");
 
     // craete the user-config.yml file if not exist
     if (!fs.existsSync("config/conf-files/user-config.yml") && !fs.existsSync("config/conf-files/auto-generated/user-config.sh")) {
@@ -19,6 +20,11 @@ function compileFile(filePath){
             }
         );
 
+        console.log("The compilation must failed at the firest attempt");
+        console.log("Please update the user-config.yml file with your connection string before running this script again");
+        console.log("!! Important end !!");
+
+        process.exit(1);
     }
 
     // copy settings from user-config.yml into user-config.sh
