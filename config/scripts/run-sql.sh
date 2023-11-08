@@ -1,22 +1,34 @@
-#!/bin/bash -ex
+#!/bin/bash 
 
+##################################################
+##                  Start                       ##
+## this should be scoped in every single script ##
+##################################################
 # load global paths
-source config/conf-files/auto-generated/paths.sh
-
-# make sure that you're in the root 
-if [ "$(pwd)" != "$dir_root" ]; then
-    cd $dir_root;
+# TODO hamza; What is better: to stop the process and redirect manually to the root or to redirect automatically?
+global_paths="config/conf-files/auto-generated/paths.sh"
+if ! [ -f "$global_paths" ]; then
+    echo "you must be in the root folder to run this script or command!"
+    echo "You will be redirected to the root folder automatically..."
+    cd $(git rev-parse --show-toplevel)
+    echo "You're in" && pwd
 fi
+source $global_paths
+##################################################
+##                  End                         ##
+## this should be scoped in every single script ##
+##################################################
+
 
 # load db_connection and sqlplus
 source $file_conf_user_config
 
 # File can be referenced either as a full path or relative path
-FILE_PATH=$1
-if [ -f "$FILE_PATH" ]; then
-    echo "$FILE_PATH exists."
+file_path=$1
+if [ -f "$file_path" ]; then
+    echo "$file_path exists."
 else
-    echo "$FILE_PATH does not exist."
+    echo "$file_path does not exist."
     exit 1
 fi
 
@@ -40,7 +52,7 @@ set codescan all
 -- 
 -- Run file
 --
-@$FILE_PATH
+@$file_path
 set define on
 show errors
 exit;

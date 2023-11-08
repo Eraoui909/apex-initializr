@@ -15,6 +15,7 @@ Please take note that this framework is **open source**. I wholeheartedly welcom
 
   * node > v20.9.0
   * You must have the database connection string
+  * It's preferred to work with Git. If not, you should make some changes [TBD]
   
 * ## Project Architecture
 

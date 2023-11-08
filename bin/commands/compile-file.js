@@ -6,9 +6,8 @@ const fs = require("fs");
 function compileFile(filePath){
 
     console.log("compiling ...");
-    console.log("!! Important start !!");
 
-    // craete the user-config.yml file if not exist
+    // create the user-config.yml file if not exist
     if (!fs.existsSync("config/conf-files/user-config.yml") && !fs.existsSync("config/conf-files/auto-generated/user-config.sh")) {
 
         copyAndRenameFile("config/templates/template_user_config.yml","config/conf-files" , "user-config.yml", (err, result) => {
@@ -20,9 +19,8 @@ function compileFile(filePath){
             }
         );
 
-        console.log("The compilation must failed at the firest attempt");
+        console.log("The compilation must fail on the first attempt");
         console.log("Please update the user-config.yml file with your connection string before running this script again");
-        console.log("!! Important end !!");
 
         process.exit(1);
     }
