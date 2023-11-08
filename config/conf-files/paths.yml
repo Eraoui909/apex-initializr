@@ -1,0 +1,49 @@
+################################################################################################################################################
+################################################################################################################################################
+## This file contains all paths for every folder or file in the project that may be used in another script.                                   ##
+## The reason for using this global configuration is to make the scripts independent of the project's architecture.                           ##
+## So, if you need to change the location of a file or folder, you only need to update the path in this file.                                 ##
+##                                                            !! important !!                                                                 ##
+## This file contains relative paths to the root project, meaning that any usage of these paths is relative to the root of the project        ##
+##                                                            !! important !!                                                                 ##
+## Folders start with "dir_" prefix, and files with "file_" prefix                                                                            ##
+################################################################################################################################################
+################################################################################################################################################
+
+## Root
+## This is the root folder based on the git repository
+## If you're not working with git, pls update this root folder with your root project
+dir_root: $(git rev-parse --show-toplevel)
+
+
+## Folders
+dir_config: config
+  dir_conf_files: config/conf-files
+  dir_conf_scripts: config/scripts
+  dir_conf_templates: config/templates
+
+dir_scripts: scripts
+  dir_scripts_automations: scripts/automations
+  dir_scripts_build: scripts/build
+
+dir_src: src
+  dir_src_apex: src/apex
+  dir_src_data: src/data
+  dir_src_jobs: src/jobs
+  dir_src_mviews: src/mviews
+  dir_src_ords: src/ords
+  dir_src_packages: src/packages
+  dir_src_tables: src/tables
+  dir_src_triggers: src/triggers
+  dir_src_views: src/views
+
+dir_test: test
+  dir_test_packages: test/packages
+
+
+## Files
+## It is better to define only the files that you need to use in another script to avoid declaring all project files.
+
+file_conf_paths: config/conf-files/auto-generated/paths.sh
+file_conf_project_config: config/conf-files/auto-generated/project-config.sh
+file_conf_user_config: config/conf-files/auto-generated/user-config.sh

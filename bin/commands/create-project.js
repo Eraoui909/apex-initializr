@@ -25,14 +25,18 @@ function initialize(projectName){
     const rmRemote = runCommand(gitRemoveRemote);
     if( !rmRemote ) process.exit(-1);
     
-    // console.log(`Installing dependencies for ${repoName}`);
-    // const installDeps = runCommand(installDepsCommand);
-    // if( !installDeps ) process.exit(-1);
+    console.log(`Installing dependencies for ${repoName}`);
+    const installDeps = runCommand(`npm install`);
+    if( !installDeps ) process.exit(-1);
+
+    runCommand(`pwd`);
+
+    console.log(`Init configuration for ${repoName}`);
+    const initConfig = runCommand(`./config/scripts/init-project.sh`);
+    if( !initConfig ) process.exit(-1);
     
     console.log(`Congratulations! your project has been installed`);
-    
-    // console.log(`cd ${repoName} && npm install`);
-    
+        
 }
 
 module.exports = initialize
