@@ -21,7 +21,7 @@ function initialize(projectName){
 
     process.chdir(`${repoName}`);
 
-    console.log(`[2] - Removing remote origin from ${repoName}`);
+    console.log(`[2] - Unlink the '${repoName}' from the remote repository.`);
     const rmRemote = runCommand(gitRemoveRemote);
     if( !rmRemote ) process.exit(-1);
     

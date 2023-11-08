@@ -32,7 +32,7 @@ set define off
 -- alter session set plsql_ccflags = 'dev_env:true';
 -- alter session set plsql_warnings = 'ENABLE:ALL';
 -- 
--- #38: This will raise a warning message in SQL*Plus but worth keeping in to encourage use if using SQLcl to compile
+-- This will raise a warning message in SQL*Plus but worth keeping in to encourage use if using SQLcl to compile
 set codescan all
 --
 -- Load user specific commands here
