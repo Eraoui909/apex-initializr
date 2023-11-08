@@ -29,7 +29,7 @@ function initialize(projectName){
     const installDeps = runCommand(`npm install`);
     if( !installDeps ) process.exit(-1);
 
-    console.log(`[1] - Init configuration for ${repoName}`);
+    console.log(`[4] - Init configuration for ${repoName}`);
     const initConfig = runCommand(`./config/scripts/init-project.sh`);
     if( !initConfig ) process.exit(-1);
     
