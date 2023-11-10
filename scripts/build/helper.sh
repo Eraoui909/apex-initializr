@@ -7,12 +7,14 @@
 # load global paths
 # TODO hamza; What is better: to stop the process and redirect manually to the root or to redirect automatically?
 global_paths="config/conf-files/auto-generated/paths.sh"
+init_project="config/scripts/init-project.sh"
 if ! [ -f "$global_paths" ]; then
     echo "[Error] you must be in the root folder to run this script or command!"
     echo "[Info] You will be redirected to the root folder automatically..."
     cd $(git rev-parse --show-toplevel)
     echo -n "[Info] You're in: " && pwd
 fi
+source $init_project
 source $global_paths
 ##################################################
 ##                  End                         ##
