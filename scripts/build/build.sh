@@ -96,7 +96,8 @@ fi
 ##                  Generate release support sql files              ##
 ######################################################################
 
-# TODO hamza: call gen_release_sql from helper script
+#call gen_release_sql from helper script
+gen_release_sql
 
 ######################################################################
 ##                              Step 4                              ##

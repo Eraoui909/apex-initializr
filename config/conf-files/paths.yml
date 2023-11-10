@@ -40,6 +40,8 @@ dir_src: src
 dir_test: test
   dir_test_packages: test/packages
 
+dir_release: release
+
 
 ## Files
 ## It is better to define only the files that you need to use in another script to avoid declaring all project files.
@@ -49,4 +51,7 @@ file_conf_project_config: config/conf-files/auto-generated/project-config.sh
 file_conf_user_config: config/conf-files/auto-generated/user-config.sh
 file_conf_init_project: config/scripts/init-project.sh
 file_apex_export: scripts/sql/apex_export.sql
+file_apex_install: scripts/sql/apex_install.sql
 file_helper_script: scripts/build/helper.sh
+file_release_load_env_vars: release/load_env_vars.sql
+file_release_all_apex: release/all_apex.sql

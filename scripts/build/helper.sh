@@ -63,3 +63,42 @@ export_apex_apps(){
     done
 
 }
+
+##################################################
+## gen_release_sql                    
+## This function is used to Build the  required files for the release 
+## It generates two files within the release folder ($dir_release)
+##      -> load_env_vars.sql: 
+##      -> all_apex.sql: 
+##
+gen_release_sql(){
+
+    local loc_env_vars=$file_release_load_env_vars
+    local loc_apex_install_all=$file_release_all_apex
+
+    source $file_conf_project_config
+
+    # Build helper sql file to load specific env variables into SQL*Plus session
+    echo "-- AUTO-GENERATED: Avoid direct modifications to this file; any alterations will be overwritten during the next build." > $loc_env_vars
+    echo "" >> $loc_env_vars
+    echo "define env_schema_name=$SCHEMA_NAME" >> $loc_env_vars
+    echo "define env_apex_app_ids=$APEX_APP_IDS" >> $loc_env_vars
+    echo "define env_apex_workspace=$APEX_WORKSPACE" >> $loc_env_vars
+    echo "" >> $loc_env_vars
+    echo "
+prompt ENV variables
+select 
+    '&env_schema_name.' env_schema_name,
+    '&env_apex_app_ids.' env_apex_app_ids,
+    '&env_apex_workspace.' env_apex_workspace
+from dual;
+    " >> $loc_env_vars
+
+    # Build helper file to install all APEX applications
+    echo "-- AUTO-GENERATED: Avoid direct modifications to this file; any alterations will be overwritten during the next build." > $loc_apex_install_all
+    echo "prompt *** APEX Installation ***" >> $loc_apex_install_all
+    for APEX_APP_ID in $(echo $APEX_APP_IDS | sed "s/,/ /g"); do
+        echo "prompt *** App: $APEX_APP_ID ***" >> $loc_apex_install_all
+        echo "@$file_apex_install $SCHEMA_NAME $APEX_WORKSPACE $APEX_APP_ID $dir_apex" >> $loc_apex_install_all
+    done
+}
