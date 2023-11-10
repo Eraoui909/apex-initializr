@@ -51,8 +51,10 @@ echo "[Debug] OPTIONS_CONNECT_TO_DB_YN: $OPTIONS_CONNECT_TO_DB_YN"
 
 ######################################################################
 ##                              Step 0                              ##
-##                     Sourcing the Helper script                   ##
-##  Sourcing the User Config script (if you're not using Jenkins)   ##
+##                  -> Sourcing the Helper script                   ##
+## -> Sourcing the User Config script (if you're not using Jenkins) ##
+##  -> When utilizing Jenkins, it is necessary to provide the       ##
+##                connection string as a parameter.                 ##
 ######################################################################
 
 echo "[Debug] Sourcing $file_conf_user_config file..."
@@ -67,7 +69,6 @@ source $file_helper_script $DB_CONN $SQLPLUS $SQLCL
 
 if [ "$OPTIONS_CONNECT_TO_DB_YN" = "Y" ]; then
   export_apex_apps
-  echo ""
 else
   echo "[Info] Skipping export_apex_app"
 fi
