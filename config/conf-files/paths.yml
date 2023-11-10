@@ -47,5 +47,6 @@ dir_test: test
 file_conf_paths: config/conf-files/auto-generated/paths.sh
 file_conf_project_config: config/conf-files/auto-generated/project-config.sh
 file_conf_user_config: config/conf-files/auto-generated/user-config.sh
+file_conf_init_project: config/scripts/init-project.sh
 file_apex_export: scripts/sql/apex_export.sql
 file_helper_script: scripts/build/helper.sh

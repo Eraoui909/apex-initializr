@@ -14,6 +14,7 @@ if ! [ -f "$global_paths" ]; then
     echo -n "[Info] You're in: " && pwd
 fi
 source $global_paths
+source $file_conf_init_project
 ##################################################
 ##                  End                         ##
 ## this should be scoped in every single script ##
