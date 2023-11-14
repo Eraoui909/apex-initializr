@@ -10,5 +10,9 @@
 ################################################################################################################################################
 
 #generate auto configuration
+
+if [ ! -d "config/conf-files/auto-generated" ]; then
+    mkdir -p "config/conf-files/auto-generated"
+fi
 ./bin/utilities/yml_parser.sh config/conf-files/paths.yml  > config/conf-files/auto-generated/paths.sh
 ./bin/utilities/yml_parser.sh config/conf-files/project-config.yml  > config/conf-files/auto-generated/project-config.sh
