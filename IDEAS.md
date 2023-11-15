@@ -10,6 +10,8 @@ To achieve this, we need to create a standardized artifact that can be installed
 
 Subsequently, this artifact can be used by CI/CD tools like Jenkins to automate the deployment process.
 
+!! I need to confirm the standard format of the artifact that each apex application should have (with all edge cases) !!
+
 #### status: [ In Progress ] 
 
 * ## Embed LOGGER as the default loggin system
@@ -29,4 +31,43 @@ Additionally, it can assist in installing the application in standalone Docker c
 !! Thinking of making it optional (enable or disable) !!
 
 * ## Generate the corresponding API for the 'CREATE TABLE' command
+
+The idea here is to provide a default API for any table when generating a table using the command `apex gen-table tableName.` 
+We can have more options like `apex gen-table tableName -api` If this optional option is provided, we can then generate the insert, update, and delete procedures directly for this table inside a new package. The package will be created automatically and will contain these three procedures.
+
+example:
+
+command
+> `apex gen-table departments -api`
+
+reults
+> new table called `departments`
+
+> new package called `department`
+
+> The `department` will have three procedures: `insertDepartment`, `updateDepartment`, and `deleteDepartment`.
+
+#### status: [ Not Started ] 
+
+* ## Provide a global settings system
+
+The idea here is to provide a global settings system to parameterize the application and make some configurations dynamic.
+
+Provide also a plsql API to interact with this settings.
+
+example:
+
+        {
+            "ENV_INFO": {
+                "TYPE": "DEV|TEST|PROD",
+                "HOSTNAME": "oracle.com"
+            },
+            "ROOT_URL": "${ENV_INFO.HOSTNAME}/ords/",
+            "HOME_URL""${ROOT_URL}/home/"
+            ...
+        }
+
+    call setting
+
+         setting.get('ENV_INFO')
 
