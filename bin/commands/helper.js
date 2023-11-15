@@ -30,6 +30,21 @@ const checkRootFolder = () => {
 
 }
 
+function createFolder(folderName, folderPath) {
+    const fullPath = path.join(folderPath, folderName);
+
+    // Check if the folder already exists
+    if (!fs.existsSync(fullPath)) {
+        // Create the folder
+        fs.mkdirSync(fullPath);
+        console.log(`Folder '${fullPath}' created successfully.`);
+        return true;
+    } else {
+        console.error(`Folder '${fullPath}' already exists.`);
+        return false;
+    }
+}
+
 
 function copyAndRenameFile(sourcePath, destinationPath, newFilename, callback) {
     const sourceFile = path.join(sourcePath);
@@ -73,5 +88,6 @@ module.exports = {
     runCommand,
     copyAndRenameFile,
     replaceStringInFile,
-    checkRootFolder
+    checkRootFolder,
+    createFolder
 }

@@ -1,0 +1,28 @@
+{
+    // Those are default snippets provided by the framework, you can modify them to meet your specific needs.
+    
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "compile",
+        "type": "shell",
+        "command": "config/scripts/run-sql.sh",
+        "args": [
+          // "${relativeFile}",
+          // "${file}"
+          // Escaped double quotes are required to make compatible with Cmder in Windows
+          "\"${relativeFile}\"",
+          "\"${file}\""
+        ],
+        "group": "build",
+        "presentation": {
+          "reveal": "always",
+          "panel": "dedicated"
+        },
+        "options": {},
+        "problemMatcher": []
+      }
+    ],
+    "inputs": [
+    ]
+  }
