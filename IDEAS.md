@@ -37,15 +37,15 @@ We can have more options like `apex gen-table tableName -api` If this optional o
 
 example:
 
-command
-> `apex gen-table departments -api`
+    command
+        `apex gen-table departments -api`
 
-reults
-> new table called `departments`
+    results
+        new table called `departments`
 
-> new package called `department`
+        new package called `department`
 
-> The `department` will have three procedures: `insertDepartment`, `updateDepartment`, and `deleteDepartment`.
+        The `department` will have three procedures: `insertDepartment`, `updateDepartment`, and `deleteDepartment`.
 
 #### status: [ Not Started ] 
 
