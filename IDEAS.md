@@ -10,7 +10,7 @@ To achieve this, we need to create a standardized artifact that can be installed
 
 Subsequently, this artifact can be used by CI/CD tools like Jenkins to automate the deployment process.
 
-!! I need to confirm the standard format of the artifact that each apex application should have (with all edge cases) !!
+> I need to confirm the standard format of the artifact that each apex application should have (with all edge cases)
 
 #### <font color="green">status: [ In Progress ] </font>
 
