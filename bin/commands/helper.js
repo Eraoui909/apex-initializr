@@ -40,7 +40,8 @@ function createFolder(folderName, folderPath) {
         console.log(`Folder '${fullPath}' created successfully.`);
         return true;
     } else {
-        console.error(`Folder '${fullPath}' already exists.`);
+        runCommand("rm -rf "+fullPath);
+        fs.mkdirSync(fullPath);
         return false;
     }
 }
