@@ -12,7 +12,7 @@ Subsequently, this artifact can be used by CI/CD tools like Jenkins to automate 
 
 !! I need to confirm the standard format of the artifact that each apex application should have (with all edge cases) !!
 
-#### status: [ In Progress ] 
+#### <font color="green">status: [ In Progress ] </font>
 
 * ## Embed LOGGER as the default loggin system
 
@@ -21,7 +21,7 @@ For that purpose, we can use the LOGGER third-party library as the default logge
 
 !! Thinking of making it optional (enable or disable) !!
 
-#### status: [ Not Started ] 
+#### <font color="red">status: [ Not Started ] </font>
 
 * ## Use liquibase to manage the application schema
 
@@ -30,7 +30,7 @@ Additionally, it can assist in installing the application in standalone Docker c
 
 !! Thinking of making it optional (enable or disable) !!
 
-#### status: [ Not Started ]
+#### <font color="red">status: [ Not Started ] </font>
 
 * ## Generate the corresponding API for the 'CREATE TABLE' command
 
@@ -49,7 +49,7 @@ example:
 
         The `department` will have three procedures: `insertDepartment`, `updateDepartment`, and `deleteDepartment`.
 
-#### status: [ Not Started ] 
+#### <font color="red">status: [ Not Started ] </font>
 
 * ## Provide a global settings system
 
@@ -73,4 +73,4 @@ example:
 
          setting.get('ENV_INFO')
 
-#### status: [ Not Started ]
+#### <font color="red">status: [ Not Started ] </font>
