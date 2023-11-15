@@ -30,6 +30,8 @@ Additionally, it can assist in installing the application in standalone Docker c
 
 !! Thinking of making it optional (enable or disable) !!
 
+#### status: [ Not Started ]
+
 * ## Generate the corresponding API for the 'CREATE TABLE' command
 
 The idea here is to provide a default API for any table when generating a table using the command `apex gen-table tableName.` 
@@ -71,3 +73,4 @@ example:
 
          setting.get('ENV_INFO')
 
+#### status: [ Not Started ]
