@@ -29,7 +29,7 @@ Please take note that this framework is **open source**. I wholeheartedly welcom
   - `src`
     - `apex`
     - `data`
-    - `jobs
+    - `jobs`
     - `mviews`
     - `packages`
     - `tables`
