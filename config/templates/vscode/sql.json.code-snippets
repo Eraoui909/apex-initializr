@@ -1,0 +1,457 @@
+{
+	// Each snippet is defined under a snippet name and has a scope, prefix, body and 
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+	// Placeholders with the same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"scope": "javascript,typescript",
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+
+	// Those are default snippets provided by the framework, you can modify them to meet your specific needs.
+
+	"ddl-alter-table-col-not-null": {
+		// "scope": "sql",
+        "prefix": "ddl-alter-table-col-not-null",
+        "body": [
+			"prompt alter table ${1:TABLE_NAME} modify (${2:COLUMN_NAME} not null);",
+			"begin",
+			"	execute immediate 'alter table ${1:TABLE_NAME} modify (${2:COLUMN_NAME} not null)';"
+			"exception when others then",
+			"	if sqlcode = -1442 then -- ORA-01442: column to be modified to NOT NULL is already NOT NULL"
+			"		dbms_output.put_line('info: ${1:TABLE_NAME}.${2:COLUMN_NAME} is already not null');",
+			"	else",
+			"		raise;",
+			"	end if;",
+			"end;",
+			"/"
+        ],
+        "description": "ddl-alter-table-col-not-null"
+    },
+	"ddl-alter-table-col-null": {
+		// "scope": "sql",
+        "prefix": "ddl-alter-table-col-null",
+        "body": [
+			"prompt alter table ${1:TABLE_NAME} modify (${2:COLUMN_NAME} null);",
+			"begin",
+			"	execute immediate 'alter table ${1:TABLE_NAME} modify (${2:COLUMN_NAME} null)';"
+			"exception when others then",
+			"	if sqlcode = -1451 then -- ORA-01451: column to be modified to NULL cannot be modified to NULL"
+			"		dbms_output.put_line('info: ${1:TABLE_NAME}.${2:COLUMN_NAME} is already not null');",
+			"	else",
+			"		raise;",
+			"	end if;",
+			"end;",
+			"/"
+        ],
+        "description": "ddl-alter-table-col-not-null"
+    },
+	"ddl-alter-table-constraint-check": {
+		// "scope": "sql",
+        "prefix": "ddl-alter-table-constraint-check",
+        "body": [
+			"prompt alter table ${1:TABLE_NAME} add constraint ${1:TABLE_NAME}_ck${2:CONSTRAINT_NUM}",
+			"begin",
+			"	execute immediate q'!",
+			"		alter table ${1:TABLE_NAME} add constraint ${1:TABLE_NAME}_ck${2:CONSTRAINT_NUM}",
+			"		check(${3:CONSTRAINT_CODE})",
+			"	!';",
+			"exception when others then",
+			"	if sqlcode = -2264 then -- ORA-02264: name already used by an existing constraint",
+			"		dbms_output.put_line('info: ${1:TABLE_NAME}_ck${2:CONSTRAINT_NUM} already exists');"
+			"	else",
+			"		raise;",
+			"	end if;",
+			"end;",
+			"/"
+        ],
+        "description": "ddl-alter-table-constraint-check"
+    },
+	"ddl-alter-table-constraint-foreign-key": {
+		// "scope": "sql",
+		"prefix": "ddl-alter-table-foreign-key",
+		"body": [
+			"prompt alter table ${1:TABLE_NAME} add constraint ${1:TABLE_NAME}_fk${2:CONSTRAINT_NUM}",
+			"begin",
+			"	execute immediate 'alter table ${1:TABLE_NAME} add constraint ${1:TABLE_NAME}_fk${2:CONSTRAINT_NUM} foreign key (${3:COLUMNS}) references ${4:FK_TABLE}(${5:FK_TABLE_COLUMNS})';",
+			"exception when others then",
+			"	if sqlcode = -2275 then -- ORA-02275: such a referential constraint already exists in the table",
+			"		dbms_output.put_line('info: ${1:TABLE_NAME}_fk${2:CONSTRAINT_NUM} already exists');",
+			"	else",
+			"		raise;",
+			"	end if;",
+			"end;",
+			"/",
+			"",
+			"prompt create ${6:UNIQUE} index ${1:TABLE_NAME}_idx${7:INDEX_NUM}",
+			"begin",
+			"	execute immediate q'!create ${6:UNIQUE} index ${1:TABLE_NAME}_idx${7:INDEX_NUM} on ${1:TABLE_NAME}(${3:COLUMNS})!';",
+			"exception when others then",
+			"	if sqlcode = -955 then -- ORA-00955: name is already used by an existing object",
+			"		dbms_output.put_line('info: ${1:TABLE_NAME}_idx${7:INDEX_NUM} already exists');",
+			"	else",
+			"		raise;",
+			"	end if;",
+			"end;",
+			"/"
+		],
+		"description": "ddl-alter-table-foreign-key"
+	},
+	"ddl-alter-table-constraint-primary-key": {
+		// "scope": "sql",
+        "prefix": "ddl-alter-table-constraint-primary-key",
+        "body": [
+			"prompt alter table ${1:TABLE_NAME} add constraint ${1:TABLE_NAME}_pk",
+			"begin",
+			"	execute immediate q'!alter table ${1:TABLE_NAME} add constraint ${1:TABLE_NAME}_pk primary key (${2:PK_COLUMN})!';",
+			"exception when others then",
+			"	if sqlcode = -2260 then -- ORA-02260: table can have only one primary key",
+			"		dbms_output.put_line('info: ${1:TABLE_NAME}_pk primary key already exists');",
+			"	else",
+			"		raise;",
+			"	end if;",
+			"end;",
+			"/"
+        ],
+        "description": "ddl-alter-table-constraint-primary-key"
+    },
+	"ddl-alter-table-constraint-unique": {
+		// "scope": "sql",
+        "prefix": "ddl-alter-table-constraint-unique",
+        "body": [
+			"prompt alter table ${1:TABLE_NAME} add constraint ${1:TABLE_NAME}_uq${2:CONSTRAINT_NUM}",
+			"begin",
+			"	execute immediate 'alter table ${1:TABLE_NAME} add constraint ${1:TABLE_NAME}_uq${2:CONSTRAINT_NUM} unique(${3:COLUMNS})';",
+			"exception when others then",
+			"	if sqlcode = -2261 then -- ORA-02261: such unique or primary key already exists in the table",
+			"		dbms_output.put_line('info: ${1:TABLE_NAME}_uq${2:CONSTRAINT_NUM} already exists');",
+			"	else",
+			"		raise;",
+			"	end if;",
+			"end;",
+			"/"
+        ],
+        "description": "ddl-alter-table-constraint-unique"
+    },
+	"ddl-alter-table-add-col": {
+		// "scope": "sql",
+        "prefix": "ddl-alter-table-add-col",
+        "body": [
+			"prompt alter table ${1:TABLE_NAME} add (${2:COLUMN_NAME} ${3:DATA_TYPE});",
+			"begin",
+			"	execute immediate q'!alter table ${1:TABLE_NAME} add (${2:COLUMN_NAME} ${3:DATA_TYPE})!';"
+			"exception when others then",
+			"	if sqlcode = -1430 then -- ORA-01430: column being added already exists in table"
+			"		dbms_output.put_line('info: ${1:TABLE_NAME}.${2:COLUMN_NAME} already exists');",
+			"	else",
+			"		raise;",
+			"	end if;",
+			"end;",
+			"/",
+			"",
+			"comment on column ${1:TABLE_NAME}.${2:COLUMN_NAME} is '${4:COLUMN_COMMENT}';"
+        ],
+        "description": "ddl-alter-table-col-not-null"
+    },
+	"ddl-create-index": {
+		// "scope": "sql",
+        "prefix": "ddl-create-index",
+        "body": [
+			"prompt create ${1:UNIQUE} index ${2:TABLE_NAME}_idx${3:INDEX_NUM}",
+			"begin",
+			"	execute immediate q'!create ${1:UNIQUE} index ${2:TABLE_NAME}_idx${3:INDEX_NUM} on ${2:TABLE_NAME}(${4:COLUMNS})!';",
+			"exception when others then",
+			"	if sqlcode = -955 then -- ORA-00955: name is already used by an existing object",
+			"		dbms_output.put_line('info: ${2:TABLE_NAME}_idx${3:INDEX_NUM} already exists');",
+			"	else",
+			"		raise;",
+			"	end if;",
+			"end;",
+			"/"
+        ],
+        "description": "ddl-create-index"
+    },
+	"ddl-create-table": {
+		// "scope": "sql",
+        "prefix": "ddl-create-table",
+        "body": [
+			"prompt create table ${1:TABLE_NAME}",
+			"begin",
+			"	execute immediate q'!",
+			"create table ${1:TABLE_NAME} (",
+			"	id number default on null to_number(sys_guid(), 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'),",
+			"	${2:ADDITIONAL_COLUMNS}",
+			"	row_version number default on null 1,",
+			"	created timestamp (6) with local time zone default on null localtimestamp, ",
+			"	created_by varchar2(255) default on null",
+			"		coalesce(",
+			"			sys_context('APEX$$SESSION','app_user'),",
+			"			regexp_substr(sys_context('userenv','client_identifier'),'^[^:]*'),",
+			"			sys_context('userenv','session_user')",
+			"		)",
+			"	,",
+			"	updated timestamp (6) with local time zone default on null localtimestamp,",
+			"	updated_by varchar2(255) default on null",
+			"		coalesce(",
+			"			sys_context('APEX$$SESSION','app_user'),",
+			"			regexp_substr(sys_context('userenv','client_identifier'),'^[^:]*'),",
+			"			sys_context('userenv','session_user')",
+			"		)",
+			")",
+			"!';",
+			"exception when others then",
+			"	if sqlcode = -955 then -- ORA-00955: name is already used by an existing object",
+			"		dbms_output.put_line('info: ${1:TABLE_NAME} already exists');",
+			"	else",
+			"		raise;",
+			"	end if;",
+			"end;",
+			"/",
+			"",
+			"",
+			"-- Enable if disabling parallel above",
+			"-- sql.json.code-snippets",
+			"-- prompt alter session disable parallel dml;",
+			"-- alter session disable parallel dml;"
+        ],
+        "description": "ddl-create-table"
+    },
+	"ddl-drop-index": {
+		// "scope": "sql",
+        "prefix": "ddl-drop-index",
+        "body": [
+			"prompt drop index ${1:TABLE_NAME}_idx${2:INDEX_NUM}",
+			"begin",
+			"	execute immediate 'drop index ${1:TABLE_NAME}_idx${2:INDEX_NUM}';",
+			"exception when others then",
+			"	if sqlcode = -1418 then -- ORA-01418: specified index does not exist",
+			"		dbms_output.put_line('info: ${1:TABLE_NAME}_idx${2:INDEX_NUM} does not exist');",
+			"	else",
+			"		raise;",
+			"	end if;",
+			"end;",
+			"/"
+        ],
+        "description": "ddl-drop-index"
+    },
+	"ddl-drop-materialized-view": {
+		// "scope": "sql",
+        "prefix": "ddl-drop-materialized-view",
+        "body": [
+			"prompt drop materialized view ${1:MVIEW_NAME}"
+			"begin"
+			"	execute immediate 'drop materialized view ${1:MVIEW_NAME}';"
+			"exception when others then"
+			"	if sqlcode = -12003 then -- ORA-12003: materialized view does not exist"
+			"		dbms_output.put_line('info: Materialized view ${1:MVIEW_NAME} does not exist');"
+			"	else"
+			"		raise;"
+			"	end if;"
+			"end;"
+			"/"
+        ],
+        "description": "ddl-drop-materialized-view"
+    },
+	"ddl-drop-package": {
+		// "scope": "sql",
+        "prefix": "ddl-drop-package",
+        "body": [
+			"prompt drop package ${1:PACKAGE_NAME}",
+			"begin",
+			"	execute immediate 'drop package ${1:PACKAGE_NAME}';",
+			"exception when others then",
+			"	if sqlcode = -4043 then -- ORA-04043: object ${1:PACKAGE_NAME} does not exist",
+			"		dbms_output.put_line('info: Package ${1:PACKAGE_NAME} does not exist');",
+			"	else",
+			"		raise;",
+			"	end if;",
+			"end;",
+			"/"
+        ],
+        "description": "ddl-drop-package"
+    },
+	"ddl-drop-table": {
+		// "scope": "sql",
+        "prefix": "ddl-drop-table",
+        "body": [
+			"prompt drop table ${1:TABLE_NAME}",
+			"begin",
+			"	execute immediate 'drop table ${1:TABLE_NAME}';",
+			"exception when others then",
+			"	if sqlcode = -942 then -- ORA-00942: table or view does not exist",
+			"		dbms_output.put_line('info: Table ${1:TABLE_NAME} does not exist');",
+			"	else",
+			"		raise;",
+			"	end if;",
+			"end;",
+			"/"
+        ],
+        "description": "ddl-drop-table"
+    },
+	"ddl-drop-table-column": {
+		// "scope": "sql",
+        "prefix": "ddl-drop-table-column",
+        "body": [
+			"prompt alter table ${1:TABLE_NAME} drop column ${2:COLUMN_NAME}",
+			"begin",
+			"	execute immediate 'alter table ${1:TABLE_NAME} drop column ${2:COLUMN_NAME}';",
+			"exception when others then",
+			"	if sqlcode = -904 then -- ORA-00904: \"${2:COLUMN_NAME}\": invalid identifier",
+			"		dbms_output.put_line('info: Column ${1:TABLE_NAME}.${2:COLUMN_NAME} does not exist');",
+			"	else",
+			"		raise;",
+			"	end if;",
+			"end;",
+			"/"
+        ],
+        "description": "ddl-drop-table-column"
+    },
+	"ddl-drop-table-constraint": {
+		// "scope": "sql",
+        "prefix": "ddl-drop-table-constraint",
+        "body": [
+			"prompt alter table ${1:TABLE_NAME} drop constraint ${1:TABLE_NAME}_ck${2:CONSTRAINT_NUM}",
+			"begin",
+			"	execute immediate 'alter table ${1:TABLE_NAME} drop constraint ${1:TABLE_NAME}_ck${2:CONSTRAINT_NUM}';",
+			"exception when others then",
+			"	if sqlcode = -2443 then -- ORA-02443: Cannot drop constraint  - nonexistent constraint",
+			"		dbms_output.put_line('info: Constraint ${1:TABLE_NAME}_ck${2:CONSTRAINT_NUM} does not exist');",
+			"	else",
+			"		raise;",
+			"	end if;",
+			"end;",
+			"/"
+        ],
+        "description": "ddl-drop-table-constraint"
+    },
+	"ddl-drop-trigger": {
+		// "scope": "sql",
+        "prefix": "ddl-drop-trigger",
+        "body": [
+			"prompt drop trigger ${1:TRIGGER_NAME}",
+			"begin",
+			"	execute immediate 'drop trigger ${1:TRIGGER_NAME}';",
+			"exception when others then",
+			"	if sqlcode = -4080 then -- ORA-04080: trigger '${1:TRIGGER_NAME}' does not exist",
+			"		dbms_output.put_line('info: Trigger ${1:TRIGGER_NAME} does not exist');",
+			"	else",
+			"		raise;",
+			"	end if;",
+			"end;",
+			"/"
+        ],
+        "description": "ddl-drop-trigger"
+    },
+	"ddl-drop-view": {
+		// "scope": "sql",
+        "prefix": "ddl-drop-view",
+        "body": [
+			"prompt drop view ${1:VIEW_NAME}"
+			"begin"
+			"	execute immediate 'drop view ${1:VIEW_NAME}';"
+			"exception when others then"
+			"	if sqlcode = -942 then -- ORA-00942: table or view does not exist"
+			"		dbms_output.put_line('info: View ${1:VIEW_NAME} does not exist');"
+			"	else"
+			"		raise;"
+			"	end if;"
+			"end;"
+			"/"
+        ],
+        "description": "ddl-drop-view"
+    },
+	"ddl-rename-column": {
+		// "scope": "sql",
+		"prefix": "ddl-rename-column",
+		"body": [
+			"prompt alter table ${1:TABLE_NAME} rename column ${2:FROM_COLUMN} to ${3:TO_COLUMN}",
+			"begin",
+			"	execute immediate 'alter table ${1:TABLE_NAME} rename column ${2:FROM_COLUMN} to ${3:TO_COLUMN}';",
+			"exception when others then",
+			"	if sqlcode = -957 then -- ORA-00957: duplicate column name",
+			"		dbms_output.put_line('info: Can not rename column ${1:TABLE_NAME}.${2:FROM_COLUMN} as it does not exist');",
+			"	else",
+			"		raise;",
+			"	end if;",
+			"end;",
+			"/"
+		],
+		"description": "ddl-rename-column"
+	},
+	"sql-update-disable-trigger": {
+		// "scope": "sql",
+        "prefix": "sql-update-disable-trigger",
+        "body": [
+			"-- disable trigger",
+			"${1:TABLE_ALIAS}.updated = ${1:TABLE_ALIAS}.updated,",
+			"${1:TABLE_ALIAS}.updated_by = ${1:TABLE_ALIAS}.updated_by"
+		],
+        "description": "Disable trigger for update statements"
+    },
+	"sql-kill-sessions": {
+		// "scope": "sql",
+        "prefix": "sql-kill-sessions",
+        "body": [
+			"declare",
+			"	l_loop_counter pls_integer := 0;",
+			"	l_sid v\\$session.sid%type;",
+			"	l_serial_num varchar2(255);",
+			"",
+			"	c_max_loops constant pls_integer := 20;",
+			"",
+			"	-- Using SQL ID to identify process as it'll be the same when parallel is blocking",
+			"	-- i.e. you'll have 5 processes all with the same sql_id",
+			"	c_sql_id v\\$session.sql_id%type := '${1:SQL_ID}';",
+			"	",
+			"begin",
+			"",
+			"	while l_loop_counter <= c_max_loops loop",
+			"		l_loop_counter := l_loop_counter + 1;",
+			"			",
+			"		select s.sid, s.serial# serial_num",
+			"		into l_sid, l_serial_num",
+			"		from v\\$session s",
+			"		where 1=1",
+			"			and s.sql_id = c_sql_id",
+			"			and s.status = 'ACTIVE' -- only kill active",
+			"			and rownum = 1 -- Kill 1 at a time. Want this in place so we know the session is active",
+			"		;",
+			"		",
+			"		execute immediate apex_string.format(",
+			"			p_message => q'!alter system kill session '%0, %1'!',",
+			"			p0 => l_sid,",
+			"			p1 => l_serial_num",
+			"		);",
+			"	end loop;",
+			"exception",
+			"	when no_data_found then null; -- This is ok as the select statement above will trigger a NDF once complete",
+			"end;",
+			"/",
+		],
+        "description": "Kills sessions and handles stuck parallel sessions"
+    },
+	"table_comment": {
+		// "scope": "sql",
+		"prefix": "table-comment",
+		"body": [
+			"comment on table ${1:TABLE_NAME} is '${2:COMMENT}'"
+		],
+		"description": "table-comment"
+	},
+	"table_column_comment": {
+		// "scope": "sql",
+		"prefix": "table-column-comment",
+		"body": [
+			"comment on column ${1:TABLE_NAME}.${2:COLUMN_NAME} is '${3:COMMENT}'"
+		],
+		"description": "table-column-comment"
+	}
+}

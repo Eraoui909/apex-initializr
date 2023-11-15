@@ -1,3 +1,4 @@
 /node_modules
 /config/conf-files/user-config.yml
 /config/conf-files/auto-generated
+/.vscode

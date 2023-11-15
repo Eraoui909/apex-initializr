@@ -9,10 +9,26 @@ program
     .action(initialize)
 ;
 
+const setupVsc = require('./commands/setup-vsc')
+program
+    .command('setup-vsc')
+    .description(`  
+                    If you're using VS Code as the code editor, you can use this command to 
+                    set up a bunch of utility snippets that can enhance your productivity.
+
+                    example:
+                        Instead of using 'apex compile <filePath>' to compile a SQL file, you can 
+                        easily compile a file by pressing '⌘ + Shift + b' and choosing your task, in this case, 'compile'.
+
+                    "We can support other editors in the future..."
+                `)
+    .action(setupVsc)
+;
+
 const compileFile = require('./commands/compile-file')
 program
     .command('compile <filePath>')
-    .description(`
+    .description(` 
                     Compile your current file into the deatabase directly.
                     <filePath>: the Path should start from the project ROOT
                 `)
