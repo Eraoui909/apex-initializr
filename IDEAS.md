@@ -19,7 +19,7 @@ Subsequently, this artifact can be used by CI/CD tools like Jenkins to automate 
 We can't have a big application without a logging system. 
 For that purpose, we can use the LOGGER third-party library as the default logger in APEX Initializr. 
 
-!! Thinking of making it optional (enable or disable) !!
+> Considering making it optional (enabling or disabling).
 
 #### <font color="red">status: [ Not Started ] </font>
 
@@ -28,7 +28,7 @@ For that purpose, we can use the LOGGER third-party library as the default logge
 We can use Liquibase to manage the application schema, facilitating the migration process between APEX instances. 
 Additionally, it can assist in installing the application in standalone Docker containers for testing purposes.
 
-!! Thinking of making it optional (enable or disable) !!
+> Considering making it optional (enabling or disabling).
 
 #### <font color="red">status: [ Not Started ] </font>
 
