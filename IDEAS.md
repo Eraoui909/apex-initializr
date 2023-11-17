@@ -21,6 +21,11 @@ For that purpose, we can use the LOGGER third-party library as the default logge
 
 > Considering making it optional (enabling or disabling).
 
+* ## Set up a default APEX application for interacting with LOGGER
+
+The idea is to offer an APEX application in case the logger is enabled. This allows the user (developer) to easily utilize LOGGER with a variety of user-friendly reports.
+
+
 #### <font color="red">status: [ Not Started ] </font>
 
 * ## Use liquibase to manage the application schema
@@ -72,5 +77,19 @@ example:
     call setting
 
          setting.get('ENV_INFO')
+
+#### <font color="red">status: [ Not Started ] </font>
+
+* ## Develop a dependency management system for PLSQL
+
+The idea is to offer a dependecy management system like npm, maven, gradle...
+
+> I'm not sure yet of the feasibility of this idea !!
+
+example:
+    
+    instead of installing a third part-library like LOGGER, we can easly add it as dependency and install it directly with 
+    a simple command, e.g.: apex install
+
 
 #### <font color="red">status: [ Not Started ] </font>
