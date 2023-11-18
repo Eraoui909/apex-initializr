@@ -14,6 +14,12 @@ Subsequently, this artifact can be used by CI/CD tools like Jenkins to automate 
 
 #### <font color="green">status: [ In Progress ] </font>
 
+* ## Figure out a way to integrate an existing project into the APEX initializr
+
+The framework currently works well for new projects that use it as a starting point. However, there are numerous existing projects. Thus, we need to figure out a way to integrate these projects into the APEX initializer.
+
+#### <font color="green">status: [ In Progress ] </font>
+
 * ## Embed LOGGER as the default loggin system
 
 We can't have a big application without a logging system. 
