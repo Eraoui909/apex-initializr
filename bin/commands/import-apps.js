@@ -24,6 +24,8 @@ function importApps(ids){
         process.exit(1);
     }
 
+    // copy settings from user-config.yml into user-config.sh
+    runCommand("./bin/utilities/yml_parser.sh config/conf-files/user-config.yml  > config/conf-files/auto-generated/user-config.sh")
 
     runCommand(`sh scripts/tasks/import-app.sh ${ids.appId}`)
 
