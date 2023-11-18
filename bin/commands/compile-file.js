@@ -23,7 +23,7 @@ function compileFile(filePath){
         );
 
         console.log("The compilation must fail on the first attempt");
-        console.log("Please update the user-config.yml file with your connection string before running this script again");
+        console.log("Before running this command again, please update the `user-config.yml` file with your connection string");
 
         process.exit(1);
     }
