@@ -37,6 +37,12 @@ Additionally, it can assist in installing the application in standalone Docker c
 
 #### <font color="red">status: [ Not Started ] </font>
 
+* ## Provide the unit testing framework
+
+We can utilize the utPLSQL framework to implement unit testing built into the framework
+
+#### <font color="red">status: [ Not Started ] </font>
+
 * ## Generate the corresponding API for the 'CREATE TABLE' command
 
 The idea here is to provide a default API for any table when generating a table using the command `apex gen-table tableName.` 
