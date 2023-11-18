@@ -1,15 +1,18 @@
 #!/usr/bin/env node
 
-const {runCommand, copyAndRenameFile} = require('./helper')
+const {runCommand, copyAndRenameFile, globalPaths} = require('./helper')
 const fs = require("fs");
 
 
 function importApps(ids){
 
-    // create the user-config.yml file if not exist
-    if (!fs.existsSync("config/conf-files/user-config.yml") && !fs.existsSync("config/conf-files/auto-generated/user-config.sh")) {
+    // make sure that you're in the root and load global paths
+    const paths = globalPaths();
 
-        copyAndRenameFile("config/templates/template_user_config.yml","config/conf-files" , "user-config.yml", (err, result) => {
+    // create the user-config.yml file if not exist
+    if (!fs.existsSync(paths.file_conf_paths_yml) && !fs.existsSync(paths.file_conf_user_config)) {
+
+        copyAndRenameFile(paths.file_template_user_config_yml, paths.dir_conf_files, "user-config.yml", (err, result) => {
                 if (err) {
                     console.error(`Error: ${err}`);
                 } else {
@@ -25,9 +28,9 @@ function importApps(ids){
     }
 
     // copy settings from user-config.yml into user-config.sh
-    runCommand("./bin/utilities/yml_parser.sh config/conf-files/user-config.yml  > config/conf-files/auto-generated/user-config.sh")
+    runCommand(`${paths.file_yml_parser} ${paths.file_conf_paths_yml}  > ${paths.file_conf_user_config}`)
 
-    runCommand(`sh scripts/tasks/import-app.sh ${ids.appId}`)
+    runCommand(`sh ${paths.file_import_apps} ${ids.appId}`)
 
 }
 

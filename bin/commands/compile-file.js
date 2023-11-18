@@ -1,19 +1,19 @@
 #!/usr/bin/env node
 
-const {runCommand, copyAndRenameFile, checkRootFolder} = require('./helper')
+const {runCommand, copyAndRenameFile, globalPaths} = require('./helper')
 const fs = require("fs");
 
 function compileFile(filePath){
 
-    // make sure that you're in the root
-    checkRootFolder();
+    // make sure that you're in the root and load global paths
+    const paths = globalPaths();
 
     console.log("compiling ...");
 
     // create the user-config.yml file if not exist
-    if (!fs.existsSync("config/conf-files/user-config.yml") && !fs.existsSync("config/conf-files/auto-generated/user-config.sh")) {
+    if (!fs.existsSync(paths.file_conf_user_config_yml) && !fs.existsSync(paths.file_conf_user_config)) {
 
-        copyAndRenameFile("config/templates/template_user_config.yml","config/conf-files" , "user-config.yml", (err, result) => {
+        copyAndRenameFile(paths.file_template_user_config_yml, paths.dir_conf_files, "user-config.yml", (err, result) => {
                 if (err) {
                     console.error(`Error: ${err}`);
                 } else {
@@ -29,11 +29,11 @@ function compileFile(filePath){
     }
 
     // copy settings from user-config.yml into user-config.sh
-    runCommand("./bin/utilities/yml_parser.sh config/conf-files/user-config.yml  > config/conf-files/auto-generated/user-config.sh")
+    runCommand(`${paths.file_yml_parser} ${paths.file_conf_paths_yml}  > ${paths.file_conf_user_config}`)
 
 
     if (fs.existsSync(filePath)) {
-        runCommand(`sh config/scripts/run-sql.sh ${filePath}`)
+        runCommand(`sh ${paths.file_run_sql} ${filePath}`)
     } else {
         console.error('The file does not exist!');
         process.exit(1); // Exit the script with an error code

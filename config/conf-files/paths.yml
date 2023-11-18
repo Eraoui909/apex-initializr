@@ -13,38 +13,55 @@
 ## Root
 ## This is the root folder based on the git repository
 ## If you're not working with git, pls update this root folder with your root project
-dir_root: $(git rev-parse --show-toplevel)
+dir_root: ./
 
 
 ## Folders
 dir_config: config
-  dir_conf_files: config/conf-files
-  dir_conf_scripts: config/scripts
-  dir_conf_templates: config/templates
+dir_conf_files: config/conf-files
+dir_conf_scripts: config/scripts
+dir_conf_templates: config/templates
 
 dir_scripts: scripts
-  dir_scripts_automations: scripts/automations
-  dir_scripts_build: scripts/build
+dir_scripts_automations: scripts/automations
+dir_scripts_build: scripts/build
 
 dir_src: src
-  dir_src_apex: src/apex
-  dir_src_data: src/data
-  dir_src_jobs: src/jobs
-  dir_src_mviews: src/mviews
-  dir_src_ords: src/ords
-  dir_src_packages: src/packages
-  dir_src_tables: src/tables
-  dir_src_triggers: src/triggers
-  dir_src_views: src/views
+dir_src_apex: src/apex
+dir_src_data: src/data
+dir_src_jobs: src/jobs
+dir_src_mviews: src/mviews
+dir_src_ords: src/ords
+dir_src_packages: src/packages
+dir_src_tables: src/tables
+dir_src_triggers: src/triggers
+dir_src_views: src/views
 
 dir_test: test
-  dir_test_packages: test/packages
+dir_test_packages: test/packages
+
+dir_vscode: .vscode
 
 
 ## Files
 ## It is better to define only the files that you need to use in another script to avoid declaring all project files.
 
 file_conf_paths: config/conf-files/auto-generated/paths.sh
+file_conf_paths_yml: config/conf-files/user-config.yml
 file_conf_project_config: config/conf-files/auto-generated/project-config.sh
+file_conf_project_config_yml: config/conf-files/project-config.yml
 file_conf_user_config: config/conf-files/auto-generated/user-config.sh
+file_conf_user_config_yml: config/conf-files/paths.yml
 file_conf_init_project: config/scripts/init-project.sh
+file_template_user_config_yml: config/templates/template_user_config.yml
+file_yml_parser: bin/utilities/yml_parser.sh
+file_run_sql: config/scripts/run-sql.sh
+file_import_apps: scripts/tasks/import-app.sh
+file_template_pkg_spec: config/templates/template_pkg.pls
+file_template_pkg_body: config/templates/template_pkg.plb
+file_template_table: config/templates/template_table.sql
+file_template_view: config/templates/template_view.sql
+
+file_plsql_snippets: config/templates/vscode/plsql.json.code-snippets
+file_sql_snippets: config/templates/vscode/sql.json.code-snippets
+file_vsc_tasks: config/templates/vscode/tasks.json

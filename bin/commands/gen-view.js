@@ -1,16 +1,16 @@
 #!/usr/bin/env node
 
-const {checkRootFolder, copyAndRenameFile, replaceStringInFile} = require('./helper')
+const {copyAndRenameFile, replaceStringInFile, globalPaths} = require('./helper')
 
 function genView(viewName){
 
-    // make sure that you're in the root
-    checkRootFolder();
+    // make sure that you're in the root and load global paths
+    const paths = globalPaths();
 
     let view = `${viewName}.sql`;
 
     console.log(`generate view ${viewName} in src/views...`);
-    copyAndRenameFile("./config/templates/template_view.sql","./src/views" , view, (err, result) => {
+    copyAndRenameFile(paths.file_template_view, paths.dir_src_views, view, (err, result) => {
             if (err) {
                 console.error(`Error: ${err}`);
             } else {
@@ -19,7 +19,7 @@ function genView(viewName){
         }
     );
     //embed the view name inside the file
-    replaceStringInFile("./src/views/"+view, 'CHANGE_ME', viewName, (err, result) => {
+    replaceStringInFile(paths.dir_src_views+"/"+view, 'CHANGE_ME', viewName, (err, result) => {
         if (err) {
             console.error(`Error: ${err}`);
         } else {
