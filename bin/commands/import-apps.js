@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const {runCommand} = require('./helper')
+const {runCommand, copyAndRenameFile} = require('./helper')
 const fs = require("fs");
 
 
