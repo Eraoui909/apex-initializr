@@ -1,19 +1,19 @@
 #!/usr/bin/env node
 
-const {runCommand, copyAndRenameFile, replaceStringInFile, checkRootFolder} = require('./helper')
+const {runCommand, copyAndRenameFile, replaceStringInFile, globalPaths} = require('./helper')
 
 function genPackage(packageName){
 
-    // make sure that you're in the root
-    checkRootFolder();
+    // make sure that you're in the root and load global paths
+    const paths = globalPaths();
 
     let packageSpec = `${packageName}.pls`;
     let packageBody = `${packageName}.plb`;
 
-    const packageSpecTemplate = `./config/templates/template_pkg.pls`;
-    const packageBodyTemplate = `./config/templates/template_pkg.plb`;
+    const packageSpecTemplate = paths.file_template_pkg_spec;
+    const packageBodyTemplate = paths.file_template_pkg_body;
 
-    const tergetPath = `./src/packages`;
+    const tergetPath = paths.dir_src_packages;
     const searchString = "CHANGEME";
 
     const package = {
@@ -29,7 +29,7 @@ function genPackage(packageName){
 
     for (const key in package) {
 
-        console.log(`generate package ${key} in src/packages...`);
+        console.log(`generate package ${key} in ${tergetPath}...`);
         // generate file
         copyAndRenameFile(package[key][1],tergetPath , package[key][0], (err, result) => {
                 if (err) {

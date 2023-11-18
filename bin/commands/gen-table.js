@@ -1,16 +1,16 @@
 #!/usr/bin/env node
 
-const {copyAndRenameFile, replaceStringInFile, checkRootFolder} = require('./helper')
+const {copyAndRenameFile, replaceStringInFile, globalPaths} = require('./helper')
 
 function genTable(tableName){
 
-    // make sure that you're in the root
-    checkRootFolder();
+    // make sure that you're in the root and load global paths
+    const paths = globalPaths();
 
     let table = `${tableName}.sql`;
 
-    console.log(`generate table ${tableName} in src/tables...`);
-    copyAndRenameFile("./config/templates/template_table.sql","./src/tables" , table, (err, result) => {
+    console.log(`generate table ${tableName} in ${paths.dir_src_tables}...`);
+    copyAndRenameFile(paths.file_template_table, paths.dir_src_tables, table, (err, result) => {
             if (err) {
                 console.error(`Error: ${err}`);
             } else {
@@ -19,7 +19,7 @@ function genTable(tableName){
         }
     );
     //embed the table name inside the file
-    replaceStringInFile("./src/tables/"+table, 'CHANGE_ME', tableName, (err, result) => {
+    replaceStringInFile(paths.dir_src_tables+"/"+table, 'CHANGE_ME', tableName, (err, result) => {
         if (err) {
             console.error(`Error: ${err}`);
         } else {

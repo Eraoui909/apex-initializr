@@ -3,6 +3,8 @@
 const {execSync} = require('child_process');
 const fs = require('fs');
 const path = require('path');
+const yaml = require('js-yaml');
+
 
 const runCommand = command => {
     try{
@@ -14,21 +16,30 @@ const runCommand = command => {
     return true;
 }
 
+const globalPaths = () => {
 
-// this script make sure that you're in the root
-const checkRootFolder = () => {
+    const yamlFilePath = 'config/conf-files/paths.yml';
 
-    // This file is just a test file, and we can use any file we want in its place.
-    const globalPaths = 'config/conf-files/auto-generated/paths.sh';
+     if (!fs.existsSync(yamlFilePath)) {
+         console.log('You must be in the root folder to run this script or command!');
+         const rootFolder = execSync('git rev-parse --show-toplevel', { encoding: 'utf8' }).trim();
+         console.log(`Please make sure that you are in ${rootFolder}`)
+         process.exit(1);
+     }
+ 
+    // Read the YAML file
+    try {
+        const yamlFileContents = fs.readFileSync(yamlFilePath, 'utf8');
+        
+        // Parse the YAML content
+        const data = yaml.load(yamlFileContents);
+        return data;
 
-    if (!fs.existsSync(globalPaths)) {
-        console.log('You must be in the root folder to run this script or command!');
-        const rootFolder = execSync('git rev-parse --show-toplevel', { encoding: 'utf8' }).trim();
-        console.log(`Please make sure that you are in ${rootFolder}`)
-        process.exit(1);
+    } catch (e) {
+        console.error('Error reading or parsing the YAML file:', e.message);
     }
-
 }
+
 
 function createFolder(folderName, folderPath) {
     const fullPath = path.join(folderPath, folderName);
@@ -89,6 +100,6 @@ module.exports = {
     runCommand,
     copyAndRenameFile,
     replaceStringInFile,
-    checkRootFolder,
-    createFolder
+    createFolder,
+    globalPaths
 }
