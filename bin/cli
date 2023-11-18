@@ -12,26 +12,33 @@ program
 const setupVsc = require('./commands/setup-vsc')
 program
     .command('setup-vsc')
-    .description(`  
-                    If you're using VS Code as the code editor, you can use this command to 
-                    set up a bunch of utility snippets that can enhance your productivity.
+    .description(`Set up the required snippets and tasks in VS Code`)
+    .addHelpText('after',
+    `  
+Details:
+    If you're using VS Code as the code editor, you can use this command to 
+    set up a bunch of utility snippets that can enhance your productivity.
 
-                    example:
-                        Instead of using 'apex compile <filePath>' to compile a SQL file, you can 
-                        easily compile a file by pressing '⌘ + Shift + b' and choosing your task, in this case, 'compile'.
+    example:
+        Instead of using 'apex compile <filePath>' to compile a SQL file, you can 
+        easily compile a file by pressing '⌘ + Shift + b' and choosing your task, in this case, 'compile'.
 
-                    "We can support other editors in the future..."
-                `)
+    "We can support other editors in the future..."
+    `)
     .action(setupVsc)
 ;
 
 const compileFile = require('./commands/compile-file')
 program
     .command('compile <filePath>')
-    .description(` 
-                    Compile your current file into the deatabase directly.
-                    <filePath>: the Path should start from the project ROOT
-                `)
+    .description(`Compile your SQL file in the database`)
+    .addHelpText('after',
+    `  
+Details:
+    Initiate the compilation process for your current file, directing the output directly into the database. 
+    Ensure to specify the file path using <filePath>, with the path originating from the project's root directory. 
+    This approach streamlines the compilation procedure, maintaining consistency with the project structure and organization.
+    `)
     .action(compileFile)
 ;
 
