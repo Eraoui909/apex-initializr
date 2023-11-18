@@ -56,5 +56,13 @@ program
     .action(genView)
 ;
 
+const importApps= require('./commands/import-apps')
+program
+    .command('import')
+    .description(`import APEX application(s) into apex/ folder`)
+    .option('-id, --app-id <number>', 'applications ids', 'APEX_APP_IDS')
+    .action(importApps)
+;
+
 
 program.parse()

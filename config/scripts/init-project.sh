@@ -11,6 +11,8 @@
 
 #generate auto configuration
 
+echo "[Debug] init the project..."
+
 if [ ! -d "config/conf-files/auto-generated" ]; then
     mkdir -p "config/conf-files/auto-generated"
 fi

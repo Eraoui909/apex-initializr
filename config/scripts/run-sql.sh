@@ -13,6 +13,7 @@ if ! [ -f "$global_paths" ]; then
     cd $(git rev-parse --show-toplevel)
     echo "You're in" && pwd
 fi
+source "config/scripts/init-project.sh"
 source $global_paths
 ##################################################
 ##                  End                         ##
