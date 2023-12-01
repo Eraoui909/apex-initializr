@@ -1,6 +1,6 @@
 # apex-initializr
 
-Framework designed for Oracle PLSQL and/or APEX development projects. This framework offers scripts and processes to accelerate your development and streamline certain aspects of your release procedures
+Framework designed for Oracle APEX and/or PLSQL development projects. This framework offers scripts and processes to accelerate your development and streamline certain aspects of your release process
 
 I truly welcome any new ideas that can further enhance the growth of this project. 
 
