@@ -18,4 +18,6 @@ if [ ! -d "config/conf-files/auto-generated" ]; then
 fi
 ./bin/utilities/yml_parser.sh config/conf-files/paths.yml  > config/conf-files/auto-generated/paths.sh
 ./bin/utilities/yml_parser.sh config/conf-files/project-config.yml  > config/conf-files/auto-generated/project-config.sh
-./bin/utilities/yml_parser.sh config/conf-files/user-config.yml  > config/conf-files/auto-generated/user-config.sh
+if [ -f "config/conf-files/user-config.yml" ]; then
+    ./bin/utilities/yml_parser.sh config/conf-files/user-config.yml  > config/conf-files/auto-generated/user-config.sh
+fi
