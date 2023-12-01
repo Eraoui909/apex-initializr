@@ -29,7 +29,7 @@ function compileFile(filePath){
     }
 
     // copy settings from user-config.yml into user-config.sh
-    runCommand(`${paths.file_yml_parser} ${paths.file_conf_paths_yml}  > ${paths.file_conf_user_config}`)
+    runCommand(`${paths.file_yml_parser} ${paths.file_conf_user_config_yml}  > ${paths.file_conf_user_config}`)
 
 
     if (fs.existsSync(filePath)) {

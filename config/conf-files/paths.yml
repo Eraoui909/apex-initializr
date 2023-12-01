@@ -47,11 +47,11 @@ dir_vscode: .vscode
 ## It is better to define only the files that you need to use in another script to avoid declaring all project files.
 
 file_conf_paths: config/conf-files/auto-generated/paths.sh
-file_conf_paths_yml: config/conf-files/user-config.yml
+file_conf_paths_yml: config/conf-files/paths.yml
 file_conf_project_config: config/conf-files/auto-generated/project-config.sh
 file_conf_project_config_yml: config/conf-files/project-config.yml
 file_conf_user_config: config/conf-files/auto-generated/user-config.sh
-file_conf_user_config_yml: config/conf-files/paths.yml
+file_conf_user_config_yml: config/conf-files/user-config.yml
 file_conf_init_project: config/scripts/init-project.sh
 file_template_user_config_yml: config/templates/template_user_config.yml
 file_yml_parser: bin/utilities/yml_parser.sh
